@@ -1,5 +1,5 @@
-FROM openjdk:11
+FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY target/timesheet-devops-1.0.jar app.jar
-EXPOSE 8080
+COPY target/*.jar app.jar
+EXPOSE 8083
 ENTRYPOINT ["java", "-jar", "app.jar"]
