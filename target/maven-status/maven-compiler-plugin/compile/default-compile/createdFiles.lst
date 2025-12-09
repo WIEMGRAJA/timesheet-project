@@ -7,7 +7,6 @@ tn/esprit/spring/entities/Departement.class
 tn/esprit/spring/entities/Role.class
 tn/esprit/spring/repository/UserRepository.class
 tn/esprit/spring/entities/Contrat.class
-com/example/timesheet/TimesheetApplication.class
 tn/esprit/spring/control/UserRestControl.class
 tn/esprit/spring/services/IUserService.class
 tn/esprit/spring/entities/User.class
