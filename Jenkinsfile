@@ -41,15 +41,16 @@ pipeline {
         }
 
         stage('DEPLOIEMENT') {
-            steps {
-                sh """
-                  export KUBECONFIG=${KUBECONFIG}
-                  kubectl set image deployment/${K8S_DEPLOYMENT} \
-                    ${K8S_CONTAINER}=${DOCKERHUB_USER}/${DOCKERHUB_REPO}:${IMAGE_VERSION} \
-                    -n ${K8S_NAMESPACE}
-                  kubectl rollout status deployment/${K8S_DEPLOYMENT} -n ${K8S_NAMESPACE}
-                """
-            }
-        }
+    steps {
+        sh """
+          export KUBECONFIG=${KUBECONFIG}
+          kubectl config use-context minikube
+          kubectl set image deployment/${K8S_DEPLOYMENT} \
+            ${K8S_CONTAINER}=${DOCKERHUB_USER}/${DOCKERHUB_REPO}:${IMAGE_VERSION} \
+            -n ${K8S_NAMESPACE}
+          kubectl rollout status deployment/${K8S_DEPLOYMENT} -n ${K8S_NAMESPACE}
+        """
+    }
+}
     }
 }
