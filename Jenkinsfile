@@ -39,14 +39,15 @@ pipeline {
         }
 
         stage('DEPLOIEMENT') {
-            steps {
-                sh """
-                  kubectl set image deployment/${K8S_DEPLOYMENT} \\
-                    ${K8S_CONTAINER}=${DOCKERHUB_REPO}:${IMAGE_TAG} \\
-                    -n ${K8S_NAMESPACE}
-                  kubectl rollout status deployment/${K8S_DEPLOYMENT} -n ${K8S_NAMESPACE}
-                """
-            }
-        }
+    steps {
+        sh """
+          export KUBECONFIG=/var/lib/jenkins/.kube/config
+          kubectl set image deployment/${K8S_DEPLOYMENT} \\
+            ${K8S_CONTAINER}=${DOCKERHUB_REPO}:${IMAGE_TAG} \\
+            -n ${K8S_NAMESPACE}
+          kubectl rollout status deployment/${K8S_DEPLOYMENT} -n ${K8S_NAMESPACE}
+        """
+    }
+}
     }
 }
